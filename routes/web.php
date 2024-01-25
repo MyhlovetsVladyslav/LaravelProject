@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\TransportController;
+use App\Http\Controllers\TrainCarriageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,15 @@ Route::get('/', function () {
     return "Welcome";
 });
 
-Route::get('/admin', function () {
-    return view('admin.dashboard');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', function () {
+        return view('admin.dashboard');
+    })->name('dashboard');
+    Route::resource('/users', UserController::class)->names('users');
+    Route::resource('/transports', TransportController::class)->names('transports');
+    Route::prefix('transports')->name('transports.')->group(function () {
+        Route::resource('/train/{train_id}/{train_type}', TrainCarriageController::class)->names('train');
+        Route::resource('/train/{train_id}', TrainCarriageController::class)->names('carriage');
+    });
+
 });
