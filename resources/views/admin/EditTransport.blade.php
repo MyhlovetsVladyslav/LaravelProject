@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2 class="mb-4">Редактирование транспорта: {{ $transport->name }}</h2>
-        <form action="{{ route('admin.transports.update', ['transport' => $transport->id]) }}" method="post">
+        <form action="{{ route('admin.transports.update', ['transport' => $transport->id, 'page' => $page]) }}" method="post">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -15,7 +15,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Редактировать</button>
-            <a href="{{ route('admin.transports.index') }}" class="btn btn-secondary mt-3">Вернуться</a>
+            <a href="{{ route('admin.transports.index', ['page' => $page]) }}" class="btn btn-secondary mt-3">Вернуться</a>
         </form>
     </div>
 @endsection

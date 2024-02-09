@@ -16,17 +16,17 @@ class TrainCarriageController extends Controller
      */
     public function index($train_id)
     {
+        $pageTransports = request()->query('page');
         $train = Train::find($train_id);
         $carriages = TrainCarriage::where('train_id', $train_id)->paginate(5);
-
-
-        return view('admin.TrainCarriages', compact('carriages','train'));
+        return view('admin.TrainCarriages', compact('carriages','train','pageTransports'));
     }
     /**
      * Show the form for creating a new resource.
      */
     public function create(TrainCarriage $carriage, $train_id)
     {
+        $page = request()->query('page');
         $train = Train::find($train_id);
         return view('admin.CreateTrainCarriage', compact('carriage','train'));
     }

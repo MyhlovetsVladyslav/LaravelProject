@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TransportController;
@@ -7,6 +9,7 @@ use App\Http\Controllers\TrainCarriageController;
 use App\Http\Controllers\TrainSeatController;
 use App\Http\Controllers\BusSeatController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TripController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,9 +25,12 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
+        Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
         Route::resource('/users', UserController::class)->names('users');
         Route::resource('/transports', TransportController::class)->names('transports');
         Route::resource('/routes', RouteController::class)->names('routes');
+        Route::resource('/trips', TripController::class)->names('trips');
+        Route::resource('/tickets', TicketController::class)->names('tickets');
         Route::prefix('transports')->name('transports.')->group(function () {
             //CRUD CARRIAGE
             Route::get('train/{train_id}', [TrainCarriageController::class, 'index'])->name('train.index');

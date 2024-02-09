@@ -8,7 +8,7 @@
             </div>
         @endif
         <h2 class="mb-4">Список транспортов</h2>
-        <a href="{{ route('admin.transports.create') }}" class="btn btn-primary mb-3">Добавить транспорт</a>
+        <a href="{{ route('admin.transports.create',['page' => $page]) }}" class="btn btn-primary mb-3">Добавить транспорт</a>
 
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -40,19 +40,21 @@
                                     <ul class="dropdown-menu bg-dark">
                                         @if($transport->transportable_type === 'App\Models\Train')
                                             <li><a class="dropdown-item text-success"
-                                                   href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id]) }}">Добавить
+                                                   href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id, 'page' => $page ]) }}">Добавить
                                                     вагон</a></li>
-                                            <li><a class="dropdown-item text-info" href="{{ route('admin.transports.train.index', ['train_id' => $transport->transportable->id]) }}">Информация о вагонах</a></li>
+                                            <li><a class="dropdown-item text-info"
+                                                   href="{{ route('admin.transports.train.index', ['train_id' => $transport->transportable->id, 'page' => $page]) }}">Информация
+                                                    о вагонах</a></li>
                                             <li>
                                                 <hr class="dropdown-divider bg-primary">
                                             </li>
                                         @endif
                                         <li><a class="dropdown-item text-warning"
-                                               href="{{ route('admin.transports.edit', ['transport' => $transport->id]) }}">Редактировать</a>
+                                               href="{{ route('admin.transports.edit', ['transport' => $transport->id, 'page' => $page]) }}">Редактировать</a>
                                         </li>
                                         <li>
                                             <form
-                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id]) }}"
+                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id, 'page' => $page]) }}"
                                                 method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')

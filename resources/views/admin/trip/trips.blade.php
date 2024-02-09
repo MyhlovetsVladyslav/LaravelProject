@@ -7,8 +7,8 @@
                 {{ session('success') }}
             </div>
         @endif
-        <h2 class="mb-4">Список вагонов поезда {{ $train->number }}</h2>
-        <a href="{{ route('admin.transports.index',['page' => $pageTransports]) }}" class="btn btn-secondary mb-3 ">Вернуться</a>
+        <h2 class="mb-4">Список рейсов</h2>
+        <a href="{{ route('admin.trips.create',['page' => $page]) }}" class="btn btn-primary mb-3">Добавить рейс</a>
 
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -26,11 +26,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($carriages as $key => $carriage)
+                {{--@foreach ($trips as $key => $trip)
                     <tr class="{{ $key % 2 == 0 ? 'even-row' : 'odd-row' }}">
-                        <td>{{ $carriage->id }}</td>
-                        <td>{{ $carriage->number }}</td>
-                        <td>{{ $carriage->type }}</td>
+                        <td>{{ $trip->id }}</td>
                         <td>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div class="btn-group dropstart">
@@ -38,19 +36,23 @@
                                         . . .
                                     </button>
                                     <ul class="dropdown-menu bg-dark">
+                                        @if($transport->transportable_type === 'App\Models\Train')
                                             <li><a class="dropdown-item text-success"
-                                                   href="{{ route('admin.transports.carriage.create', ['train_id' => $train->id, 'carriage_id' => $carriage->id]) }}">Добавить
-                                                    место</a></li>
-                                        <li><a class="dropdown-item text-info" href="{{ route('admin.transports.carriage.index', ['train_id' => $train->id, 'carriage_id' => $carriage->id]) }}">Информация о местах</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider bg-primary">
-                                        </li>
+                                                   href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id, 'page' => $page ]) }}">Добавить
+                                                    вагон</a></li>
+                                            <li><a class="dropdown-item text-info"
+                                                   href="{{ route('admin.transports.train.index', ['train_id' => $transport->transportable->id, 'page' => $page]) }}">Информация
+                                                    о вагонах</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider bg-primary">
+                                            </li>
+                                        @endif
                                         <li><a class="dropdown-item text-warning"
-                                               href="{{ route('admin.transports.train.edit', ['train_id' => $train->id, 'carriage' => $carriage->id]) }}">Редактировать</a>
+                                               href="{{ route('admin.transports.edit', ['transport' => $transport->id, 'page' => $page]) }}">Редактировать</a>
                                         </li>
                                         <li>
                                             <form
-                                                action="{{ route('admin.transports.train.destroy', ['train_id' => $train->id, 'carriage' => $carriage->id]) }}"
+                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id, 'page' => $page]) }}"
                                                 method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -62,18 +64,19 @@
                                     </ul>
                                 </div>
 
+
                             </div>
                         </td>
                     </tr>
-                @endforeach
+                @endforeach--}}
                 </tbody>
             </table>
         </div>
 
 
-        <div class="d-flex justify-content-center mt-4">
-            {{ $carriages ->links() }}
-        </div>
+        {{--<div class="d-flex justify-content-center mt-4">
+            {{ $transports->links() }}
+        </div>--}}
     </div>
 
     <style>

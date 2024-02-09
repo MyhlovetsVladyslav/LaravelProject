@@ -33,6 +33,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.routes.index') }}">Маршруты</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.trips.index') }}">Рейсы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.tickets.index') }}">Билеты</a>
+                </li>
             </ul>
 
                 <ul class="navbar-nav ms-auto">
@@ -71,5 +77,6 @@
         }
     }, 5000);
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </body>
 </html>

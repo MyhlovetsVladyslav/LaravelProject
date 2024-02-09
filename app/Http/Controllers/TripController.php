@@ -2,35 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateTransportRequest;
-use App\Http\Requests\EditTransportRequest;
-use App\Models\TrainCarriage;
+use App\Models\Trip;
 use Illuminate\Http\Request;
-use App\Models\Transport;
-use App\Models\Train;
-use App\Models\Bus;
-use App\Models\Plane;
 
-class TransportController extends Controller
+class TripController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $transports = Transport::paginate(5);
-        $page = $transports->currentPage();
-        return view('admin.transports', compact('transports','page'));
+        $trips = Trip::paginate(5);
+        $page = $trips->currentPage();
+        return view('admin.trip.trips', compact('trips','page'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Transport $transport)
+    public function create()
     {
         $page = request()->query('page');
-        return view('admin.CreateTransport', compact('transport', 'page'));
+        return view('admin.trip.CreateTrip', compact( 'page'));
     }
 
     /**

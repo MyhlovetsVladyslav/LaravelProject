@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Добавить транспорт</h2>
-        <form action="{{ route('admin.transports.store','$transport_i') }}" method="post">
+        <form action="{{ route('admin.transports.store') }}" method="post">
             @csrf
             <div class="form-group">
                 <label for="number">Номер:</label>
@@ -41,7 +41,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary mt-3">Добавить</button>
-            <a href="{{ route('admin.transports.index') }}" class="btn btn-secondary mt-3">Вернуться</a>
+            <a href="{{ route('admin.transports.index',['page' => $page]) }}" class="btn btn-secondary mt-3">Вернуться</a>
         </form>
     </div>
     <script>
