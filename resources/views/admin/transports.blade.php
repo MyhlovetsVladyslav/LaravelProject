@@ -33,20 +33,32 @@
                         <td>{{ $transport->type }} @if($transport->transportable->type) / {{ $transport->transportable->type  }} @endif</td>
                         <td>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Действия
+                                <div class="btn-group dropstart">
+                                    <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        . . .
                                     </button>
-                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <ul class="dropdown-menu bg-dark">
                                         @if($transport->transportable_type === 'App\Models\Train')
-                                            <li><a class="dropdown-item" href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id, 'train_type' => $transport->transportable->type]) }}">Добавить вагон</a></li>
+                                            <li><a class="dropdown-item text-success"
+                                                   href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id]) }}">Добавить
+                                                    вагон</a></li>
+                                            <li><a class="dropdown-item text-info" href="{{ route('admin.transports.train.index', ['train_id' => $transport->transportable->id]) }}">Информация о вагонах</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider bg-primary">
+                                            </li>
                                         @endif
-                                        <li><a class="dropdown-item" href="{{ route('admin.transports.edit', ['transport' => $transport->id]) }}">Редактировать</a></li>
+                                        <li><a class="dropdown-item text-warning"
+                                               href="{{ route('admin.transports.edit', ['transport' => $transport->id]) }}">Редактировать</a>
+                                        </li>
                                         <li>
-                                            <form action="{{ route('admin.transports.destroy', ['transport' => $transport->id]) }}" method="post" style="display: inline;">
+                                            <form
+                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id]) }}"
+                                                method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="dropdown-item" onclick="return confirm('Вы уверены?')">Удалить</button>
+                                                <button type="submit" class="dropdown-item text-danger"
+                                                        onclick="return confirm('Вы уверены?')">Удалить
+                                                </button>
                                             </form>
                                         </li>
                                     </ul>

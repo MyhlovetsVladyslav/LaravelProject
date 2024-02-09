@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateTransportRequest;
 use App\Http\Requests\EditTransportRequest;
+use App\Models\TrainCarriage;
 use Illuminate\Http\Request;
 use App\Models\Transport;
 use App\Models\Train;
@@ -78,15 +79,20 @@ class TransportController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(EditTransportRequest $request, Transport $transport)
+    public function update(EditTransportRequest  $request, Transport $transport)
     {
-        $transport->update([
-            'number' => $request->input('number'),
-            'type' => $request->input('type'),
-        ]);
+        // Проверка, существует ли связанная модель transportable
+        if ($transport->transportable) {
+            $transport->transportable->update([
+                'number' => $request->input('number')
+            ]);
 
-        // Редирект с сообщением об успешном обновлении
-        return redirect()->route('admin.transports.index', $transport)->with('success', 'Транспорт успешно обновлен');
+            // Редирект с сообщением об успешном обновлении
+            return redirect()->route('admin.transports.index')->with('success', 'Транспорт успешно обновлен');
+        }
+
+        // Если transportable не существует, выполните нужные действия (например, бросьте исключение или верните сообщение об ошибке)
+        return redirect()->route('admin.transports.index')->with('error', 'Связанная модель transportable не существует');
     }
 
     /**
@@ -94,8 +100,6 @@ class TransportController extends Controller
      */
     public function destroy(Transport $transport)
     {
-        $transportType = Transport::with('transportable')->find($transport->id)->transportable;
-        $transportType->delete();
         $transport->delete();
         return redirect()->route('admin.transports.index')->with('success', 'Транспорт успешно удален');
     }

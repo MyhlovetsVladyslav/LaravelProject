@@ -14,4 +14,17 @@ class TrainCarriage extends Model
         'number',
         'type'
     ];
+
+    protected static function booted()
+    {
+        static::deleting(function ($carriage) {
+            $seats = TrainSeat::where('carriage_id', $carriage->id)->get();
+            foreach ($seats as $seat) {
+                $seat->delete();
+            }
+
+        });
+    }
+
+
 }

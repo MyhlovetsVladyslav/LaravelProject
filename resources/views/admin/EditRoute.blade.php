@@ -31,8 +31,8 @@
                 <p class="alert alert-danger mt-2">{{ $message }}</p>
                 @enderror
             </div>
-            <input type="hidden" name="distance" id="Distance-hidden">
-            <input type="hidden" name="duration" id="Duration-hidden">
+            <input type="hidden" name="distance" id="Distance-hidden" value="{{ old('distance', $route->routable->distance) }}">
+            <input type="hidden" name="duration" id="Duration-hidden" value="{{ old('duration', $route->routable->duration) }}">
 
             <button type="submit" class="btn btn-primary mt-3">Редактировать</button>
             <a href="{{ route('admin.routes.index') }}" class="btn btn-secondary mt-3">Вернуться</a>

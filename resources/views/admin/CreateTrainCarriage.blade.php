@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <h2>Добавить вагон</h2>
-        <form action="{{ route('admin.transports.carriage.store', ['train_id' => $train_id]) }}" method="post">
+        <form action="{{ route('admin.transports.train.store', ['train_id' => $train->id]) }}" method="post">
             @csrf
             <div class="form-group">
                 <label for="number">Номер вагона:</label>
@@ -14,7 +14,7 @@
             </div>
             <div class="form-group mt-3">
                 <label for="type">Тип вагона:</label>
-                @if($train_type === 'passenger')
+                @if($train->type === 'passenger')
                     <select name="type" class="form-control" id="typeSelect" required>
                         <option value="platskart" @if(old('type', $carriage->type) === 'platskart') selected @endif>
                             Плацкарт

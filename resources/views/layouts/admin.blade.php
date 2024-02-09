@@ -12,7 +12,7 @@
 </head>
 <body>
 <header>
-    <!-- Add your header content here -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5ajTpCZSe5NrKdketMpNXK0RNY7UhPKg&libraries=places&callback=initMap" async></script>
 </header>
 <div class="row">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sidebar">
@@ -21,19 +21,37 @@
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        @auth()
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.users.index') }}">Users</a>
+                    <a class="nav-link" href="{{ route('admin.users.index') }}">Пользователи</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.transports.index') }}">Transports</a>
+                    <a class="nav-link" href="{{ route('admin.transports.index') }}">Транспорты</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.routes.index') }}">Маршруты</a>
                 </li>
             </ul>
+
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <form action="{{ route('logout') }}" method="post" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-danger m-2"
+                                    onclick="return confirm('Вы уверены?')">Выход
+                            </button>
+                        </form>
+                    </li>
+
+            </ul>
         </div>
+        @endauth
     </nav>
 
     <main>
+
         <div class="container-fluid">
             @yield('content')
         </div>

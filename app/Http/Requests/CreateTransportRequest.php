@@ -22,7 +22,7 @@ class CreateTransportRequest extends FormRequest
     public function rules(): array
     {
         return [
-
+            'number' => 'required|unique:buses,number|unique:trains,number|unique:planes,number',
         ];
     }
 }

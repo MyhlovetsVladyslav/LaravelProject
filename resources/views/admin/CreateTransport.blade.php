@@ -35,19 +35,6 @@
                         </option>
                     </select>
                 </div>
-
-
-                <div class="subtypeFields planeFields" style="display:none;">
-                    <label for="plane_field">Plane Field:</label>
-                    <input type="text" name="plane_field">
-                </div>
-
-
-
-                <div class="subtypeFields busFields" style="display:none;">
-                    <label for="bus_field">Bus Field:</label>
-                    <input type="text" name="bus_field">
-                </div>
                 @error('subtype')
                 <p class="alert alert-danger mt-2">{{ $message }}</p>
                 @enderror

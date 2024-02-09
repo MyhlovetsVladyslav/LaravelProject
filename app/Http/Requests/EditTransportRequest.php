@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class EditTransportRequest extends FormRequest
 {
@@ -22,9 +23,13 @@ class EditTransportRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'number' => 'required|integer|unique:transports,number,' . $this->transport->id,
-            'type' => 'required|string',
-            'status' => 'required|string|max:20',
+            'number' => [
+                'required',
+                Rule::unique('buses', 'number')->ignore($this->transport->transportable->id, 'id'),
+                Rule::unique('trains', 'number')->ignore($this->transport->transportable->id, 'id'),
+                Rule::unique('planes', 'number')->ignore($this->transport->transportable->id, 'id'),
+            ],
+
         ];
     }
 }

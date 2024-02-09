@@ -13,4 +13,13 @@ class Transport extends Model
     {
         return $this->morphTo();
     }
+
+    protected static function booted()
+    {
+        static::deleting(function ($transport) {
+            $transport->transportable()->each(function ($item) {
+                $item->delete();
+            });
+        });
+    }
 }
