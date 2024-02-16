@@ -12,7 +12,6 @@
 </head>
 <body>
 <header>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5ajTpCZSe5NrKdketMpNXK0RNY7UhPKg&libraries=places&callback=initMap" async></script>
 </header>
 <div class="row">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sidebar">

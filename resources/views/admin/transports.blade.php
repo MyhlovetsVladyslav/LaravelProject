@@ -52,17 +52,17 @@
                                         <li><a class="dropdown-item text-warning"
                                                href="{{ route('admin.transports.edit', ['transport' => $transport->id, 'page' => $page]) }}">Редактировать</a>
                                         </li>
-                                        <li>
-                                            <form
-                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id, 'page' => $page]) }}"
-                                                method="post" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="dropdown-item text-danger"
-                                                        onclick="return confirm('Вы уверены?')">Удалить
-                                                </button>
-                                            </form>
-                                        </li>
+                                            <li>
+                                                <form
+                                                    action="{{ route('admin.transports.destroy', ['transport' => $transport->id, 'page' => $page]) }}"
+                                                    method="post" style="display: inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="dropdown-item text-danger"
+                                                            onclick="return confirm('Вы уверены?')">Удалить
+                                                    </button>
+                                                </form>
+                                            </li>
                                     </ul>
                                 </div>
 

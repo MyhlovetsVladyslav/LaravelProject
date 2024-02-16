@@ -16,4 +16,9 @@ class Bus extends Model
     {
         return $this->morphOne(Transport::class, 'transportable');
     }
+
+    public function  seats()
+    {
+        return $this->hasMany(BusSeat::class, 'bus_id');
+    }
 }

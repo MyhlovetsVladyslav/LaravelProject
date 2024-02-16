@@ -7,30 +7,36 @@
                 {{ session('success') }}
             </div>
         @endif
-        <h2 class="mb-4">Список вагонов поезда {{ $train->number }}</h2>
-        <a href="{{ route('admin.transports.index',['page' => $page]) }}" class="btn btn-secondary mb-3 ">Вернуться</a>
+        <h2 class="mb-4">Список биллетов</h2>
+        <a href="{{ route('admin.tickets.create',['page' => $page]) }}" class="btn btn-primary mb-3">Добавить биллет</a>
 
         <div class="table-responsive">
             <table class="table table-bordered">
                 <colgroup>
-                    <col style="width: 33%;">
-                    <col style="width: 33%;">
-                    <col style="width: 33%;">
+                    <col style="width: 5%;">
+                    <col style="width: 5%;">
+                    <col style="width: 60%;">
+                    <col style="width: 5%;">
+                    <col style="width: 15%;">
                 </colgroup>
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Номер</th>
-                    <th>Тип</th>
+                    <th>Номер рейса</th>
+                    <th>Рейс</th>
+                    <th>Место</th>
+                    <th>Пользователь</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach ($carriages as $key => $carriage)
+                @foreach ($tickets as $key => $ticket)
                     <tr class="{{ $key % 2 == 0 ? 'even-row' : 'odd-row' }}">
-                        <td>{{ $carriage->id }}</td>
-                        <td>{{ $carriage->number }}</td>
-                        <td>{{ $carriage->type }}</td>
+                        <td>{{ $ticket->id }}</td>
+                        <td>{{ $ticket->trip->id }}</td>
+                        <td>{{ $ticket->trip->route->routable->departure_location }} / {{ $ticket->trip->route->routable->arrival_location }} </td>
+                        <td>{{ $ticket->seat->seatable->seat_number  }} </td>
+                        <td>{{ $ticket->user->name  }} </td>
                         <td>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div class="btn-group dropstart">
@@ -38,19 +44,12 @@
                                         . . .
                                     </button>
                                     <ul class="dropdown-menu bg-dark">
-                                            <li><a class="dropdown-item text-success"
-                                                   href="{{ route('admin.transports.carriage.create', ['train_id' => $train->id, 'carriage_id' => $carriage->id]) }}">Добавить
-                                                    место</a></li>
-                                        <li><a class="dropdown-item text-info" href="{{ route('admin.transports.carriage.index', ['train_id' => $train->id, 'carriage_id' => $carriage->id]) }}">Информация о местах</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider bg-primary">
-                                        </li>
                                         <li><a class="dropdown-item text-warning"
-                                               href="{{ route('admin.transports.train.edit', ['train_id' => $train->id, 'carriage' => $carriage->id]) }}">Редактировать</a>
+                                               href="">Редактировать</a>
                                         </li>
                                         <li>
                                             <form
-                                                action="{{ route('admin.transports.train.destroy', ['train_id' => $train->id, 'carriage' => $carriage->id]) }}"
+                                                action=""
                                                 method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -62,6 +61,7 @@
                                     </ul>
                                 </div>
 
+
                             </div>
                         </td>
                     </tr>
@@ -72,7 +72,7 @@
 
 
         <div class="d-flex justify-content-center mt-4">
-            {{ $carriages ->links() }}
+            {{ $tickets->links() }}
         </div>
     </div>
 

@@ -16,4 +16,9 @@ class Plane extends Model
     {
         return $this->morphOne(Transport::class, 'transportable');
     }
+
+    public function  seats()
+    {
+        return $this->hasMany(PlaneSeat::class, 'plane_id');
+    }
 }

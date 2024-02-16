@@ -9,6 +9,10 @@ class Route extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+      'type'
+    ];
+
     public function routable()
     {
         return $this->morphTo();

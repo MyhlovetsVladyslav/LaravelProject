@@ -14,6 +14,10 @@ class TrainCarriage extends Model
         'number',
         'type'
     ];
+    public function seats()
+    {
+        return $this->hasMany(TrainSeat::class, 'carriage_id');
+    }
 
     protected static function booted()
     {
@@ -25,6 +29,5 @@ class TrainCarriage extends Model
 
         });
     }
-
 
 }

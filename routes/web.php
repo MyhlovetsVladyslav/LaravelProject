@@ -25,7 +25,10 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');
-        Route::get('/events/search', [EventController::class, 'search'])->name('events.search');
+        Route::get('/events/searchRoutes', [EventController::class, 'searchRoutes'])->name('events.searchRoutes');
+        Route::get('/events/searchTransports', [EventController::class, 'searchTransports'])->name('events.searchTransports');
+        Route::get('/events/searchTrip', [EventController::class, 'searchTrip'])->name('events.searchTrip');
+        Route::get('/events/searchUser', [EventController::class, 'searchUser'])->name('events.searchUser');
         Route::resource('/users', UserController::class)->names('users');
         Route::resource('/transports', TransportController::class)->names('transports');
         Route::resource('/routes', RouteController::class)->names('routes');

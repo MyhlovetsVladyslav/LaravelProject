@@ -18,6 +18,17 @@ class Train extends Model
     {
         return $this->morphOne(Transport::class, 'transportable');
     }
+    public function seats()
+    {
+        return $this->hasManyThrough(
+            TrainSeat::class,
+            TrainCarriage::class,
+            'train_id',
+            'carriage_id',
+            'id',
+            'id'
+        )->select('train_seats.*', 'train_carriages.type as carriage_type','train_carriages.number as carriage_number');
+    }
 
     protected static function booted()
     {

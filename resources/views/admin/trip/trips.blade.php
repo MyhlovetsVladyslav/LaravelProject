@@ -13,22 +13,34 @@
         <div class="table-responsive">
             <table class="table table-bordered">
                 <colgroup>
-                    <col style="width: 33%;">
-                    <col style="width: 33%;">
-                    <col style="width: 33%;">
+                    <col style="width: 5%;">
+                    <col style="width: 30%;">
+                    <col style="width: 30%;">
+                    <col style="width: 5%;">
+                    <col style="width: 15%;">
+                    <col style="width: 15%;">
+                    <col style="width: 5%;">
                 </colgroup>
                 <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
-                    <th>Номер</th>
-                    <th>Тип</th>
+                    <th>Место отправления</th>
+                    <th>Место прибытия</th>
+                    <th>Транспорт</th>
+                    <th>Время отправления</th>
+                    <th>Время прибытия</th>
                     <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
-                {{--@foreach ($trips as $key => $trip)
+                @foreach ($trips as $key => $trip)
                     <tr class="{{ $key % 2 == 0 ? 'even-row' : 'odd-row' }}">
                         <td>{{ $trip->id }}</td>
+                        <td>{{ $trip->route->routable->departure_location }}</td>
+                        <td>{{ $trip->route->routable->arrival_location }}</td>
+                        <td>{{ $trip->transport->transportable->number }}</td>
+                        <td>{{ $trip->departure_time }}</td>
+                        <td>{{ $trip->arrival_time }}</td>
                         <td>
                             <div style="display: flex; justify-content: space-between; align-items: center;">
                                 <div class="btn-group dropstart">
@@ -36,23 +48,12 @@
                                         . . .
                                     </button>
                                     <ul class="dropdown-menu bg-dark">
-                                        @if($transport->transportable_type === 'App\Models\Train')
-                                            <li><a class="dropdown-item text-success"
-                                                   href="{{ route('admin.transports.train.create', ['train_id' => $transport->transportable->id, 'page' => $page ]) }}">Добавить
-                                                    вагон</a></li>
-                                            <li><a class="dropdown-item text-info"
-                                                   href="{{ route('admin.transports.train.index', ['train_id' => $transport->transportable->id, 'page' => $page]) }}">Информация
-                                                    о вагонах</a></li>
-                                            <li>
-                                                <hr class="dropdown-divider bg-primary">
-                                            </li>
-                                        @endif
                                         <li><a class="dropdown-item text-warning"
-                                               href="{{ route('admin.transports.edit', ['transport' => $transport->id, 'page' => $page]) }}">Редактировать</a>
+                                               href="">Редактировать</a>
                                         </li>
                                         <li>
                                             <form
-                                                action="{{ route('admin.transports.destroy', ['transport' => $transport->id, 'page' => $page]) }}"
+                                                action=""
                                                 method="post" style="display: inline;">
                                                 @csrf
                                                 @method('DELETE')
@@ -68,15 +69,15 @@
                             </div>
                         </td>
                     </tr>
-                @endforeach--}}
+                @endforeach
                 </tbody>
             </table>
         </div>
 
 
-        {{--<div class="d-flex justify-content-center mt-4">
-            {{ $transports->links() }}
-        </div>--}}
+        <div class="d-flex justify-content-center mt-4">
+            {{ $trips->links() }}
+        </div>
     </div>
 
     <style>

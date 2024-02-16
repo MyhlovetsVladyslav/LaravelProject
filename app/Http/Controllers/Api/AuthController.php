@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateUserApiRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,7 +12,7 @@ use function Laravel\Prompts\error;
 
 class AuthController extends Controller
 {
-  public function register(CreateUserApiRequest $request)
+  public function register(Request $request)
   {
       $user = User::create([
           'name' => $request->get('name'),

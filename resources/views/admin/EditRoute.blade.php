@@ -6,17 +6,6 @@
         <form action="{{ route('admin.routes.update', ['route' => $route->id]) }}" method="post">
             @csrf
             @method('PUT')
-            <div class="form-group">
-                <label for="type">Тип транспорта:</label>
-                <select name="type" class="form-control" required>
-                    <option value="train" @if(old('type', $route->routable->type) === 'train') selected @endif>
-                        Поезд
-                    </option>
-                    <option value="bus" @if(old('type', $route->routable->type) === 'bus') selected @endif>Автобус
-                    </option>
-                    <option value="plane" @if(old('type', $route->routable->type) === 'plane') selected @endif>Самолет</option>
-                </select>
-            </div>
             <div class="form-group mt-3">
                 <label for="departure_location">Место отправления:</label>
                 <input type="text" name="departure_location" class="form-control" id="departure-input" value="{{ old('departure_location', $route->routable->departure_location) }}">
@@ -39,6 +28,7 @@
         </form>
     </div>
 @endsection
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5ajTpCZSe5NrKdketMpNXK0RNY7UhPKg&libraries=places&callback=initMap" async></script>
 <script>
 
     function calculateDistanceAndTime() {

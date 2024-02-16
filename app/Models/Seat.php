@@ -13,4 +13,8 @@ class Seat extends Model
     {
         return $this->morphTo();
     }
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }
